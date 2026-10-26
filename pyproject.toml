@@ -1,0 +1,71 @@
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[project]
+name = "tc-cwi"
+version = "0.1.2"
+description = "Python toolbox to apply EOC compensation algorithms to ultrasonic testing data."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name="Arnaud Deraemaeker (ULB)", email="Arnaud.Deraemaeker@ulb.be" },
+    { name="Damiano Gianotti (Zensor)", email="damiano.gianotti@zensor.be" },
+    { name="Jitendra Kumar Sharma (ULB)", email="jitendra.kumar.sharma@ulb.be" },
+    { name="Luigi Trezza (Airbus)" },
+]
+maintainers = [
+    { name="Arnaud Deraemaeker (ULB)", email="Arnaud.Deraemaeker@ulb.be" },
+    { name="Zensor", email="support@zensor.be" },
+]
+keywords = [
+    "coda wave interferometry",
+    "structural health monitoring",
+    "temperature compensation",
+    "time-stretching",
+    "ultrasonic",
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "scipy",
+]
+
+[project.urls]
+Repository = "https://github.com/aderaema/US-EOC-compensation-toolbox"
+Issues = "https://github.com/aderaema/US-EOC-compensation-toolbox/issues"
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+]
+
+# Explicit rule set: ruff's implicit defaults grow between releases, so this gate
+# spells out what it checks and must not start failing on an unrelated `uv sync`.
+# SIM is kept out on purpose (it prefers `T[-1] < T * 1.2` over `T * 1.2 > T[-1]`).
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E4", "E7", "E9", "F",     # pycodestyle (errors) + pyflakes
+    "B",                        # bugbear
+    "I", "UP", "C4",            # import order, modern syntax, comprehensions
+    "FURB122", "RUF015", "RUF022", "RUF046",  # the few specific rules worth their noise
+]
+
+[tool.coverage.run]
+source = ["tc_cwi"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
