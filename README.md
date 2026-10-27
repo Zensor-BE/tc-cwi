@@ -8,14 +8,16 @@ Lightweight Python toolbox for **Environmental and Operational Condition (EoC) c
 
 Temperature variations change the apparent wave velocity of ultrasonic guided waves, which can mask structural damage. `tc-cwi` estimates the stretch factor (`eps`) and/or time shift (`dt`) that best realign a measured signal with a reference, and reports the remaining decorrelation.
 
-## Authors
+## Authors & Attribution
 
 - Arnaud Deraemaeker (ULB)
 - Damiano Gianotti (Zensor)
 - Jitendra Kumar Sharma (ULB)
 - Luigi Trezza (Airbus)
 
-Developed as part of WP3, Deliverable D3.3. Packaged and maintained by Zensor.
+Developed as part of WP3, Deliverable D3.3.
+
+The core Time-Stretching CWI algorithm and original code were developed in MATLAB by Arnaud Deraemaeker, Jitendra Kumar Sharma, and the BATir research group at ULB (Université Libre de Bruxelles). Python translation, packaging, test harness, and ongoing maintenance are performed by Zensor (Damiano Gianotti and Arthur Gossuin).
 
 ---
 
@@ -144,11 +146,20 @@ uv run pytest --cov   # statements + branches, with the missing lines
 uv run ruff check .
 ```
 
-Releasing to PyPI: bump `version` in `pyproject.toml`, then push a matching tag. The [publish workflow](https://github.com/aderaema/US-EOC-compensation-toolbox/blob/main/.github/workflows/publish.yml) lints, builds, tests the built distributions and publishes them.
+Releasing to PyPI: bump `version` in `pyproject.toml`, build, and push a matching tag. The [publish workflow](https://github.com/aderaema/US-EOC-compensation-toolbox/blob/main/.github/workflows/publish.yml) lints, builds, tests the built distributions in isolation, and publishes them to PyPI:
 
 ```bash
-git tag -a v0.1.0 -m v0.1.0
-git push origin v0.1.0
+git commit -am "chore: release v0.1.3"
+git tag -a v0.1.3 -m "v0.1.3"
+git push origin main
+git push origin v0.1.3
+```
+
+Alternatively, build and publish manually with `uv`:
+
+```bash
+uv build
+uv publish
 ```
 
 ---
