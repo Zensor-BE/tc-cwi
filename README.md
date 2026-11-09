@@ -1,5 +1,6 @@
 # `tc-cwi`
 
+[![PyPI](https://img.shields.io/pypi/v/tc-cwi.svg)](https://pypi.org/project/tc-cwi/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Build System](https://img.shields.io/badge/build-uv__build-blueviolet)](https://github.com/astral-sh/uv)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/aderaema/tc-cwi/blob/main/LICENSE)
